@@ -19,8 +19,14 @@ Example 3:
     Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 */
 
-function isPalindrome(x: number): boolean {
-    
-    return false;
-};
+export function isPalindrome(x: number): boolean {
+    let str = x.toString();
 
+    for(let x = 0; x < str.length / 2; x++){
+        if(str.charAt(x) != str.charAt(str.length - 1 - x)){
+            return false;
+        }
+    }
+    
+    return true;
+};

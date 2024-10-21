@@ -24,7 +24,7 @@ Constraints:
 
 */
 
-function fizzBuzz(n: number): string[] {
+export function fizzBuzz(n: number): string[] {
     const arr: string[] = [];
 
     for(let i = 1; i <= n; i++){
