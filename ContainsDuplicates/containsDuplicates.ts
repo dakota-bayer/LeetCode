@@ -26,13 +26,31 @@ Constraints:
 */
 
 export function containsDuplicate(nums: number[]): boolean {
-    for(let i = 0; i < nums.length; i++){
-        const current = nums[i];
-        for(let j = i + 1; j < nums.length; j++){
-            if(nums[j] === current){
-                return true;
-            }
+    // OPTION 1 - time limit exceeded
+    // for(let i = 0; i < nums.length; i++){
+    //     const current = nums[i];
+    //     for(let j = i + 1; j < nums.length; j++){
+    //         if(nums[j] === current){
+    //             return true;
+    //         }
+    //     }
+    // }
+    // return false;
+
+    // OPTION 2 - good!
+    //return new Set(nums).size < nums.length;
+
+    // OPTION 3 - good too
+    const set = new Set();
+    for(let num of nums){
+        if(set.has(num)){
+            return true;
         }
+        set.add(num);
     }
+
     return false;
+
+    // It is O(n) to add the items to the set. 
+    // It is O(n^2) to do it my first way
 };
