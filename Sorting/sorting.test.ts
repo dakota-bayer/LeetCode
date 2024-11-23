@@ -1,57 +1,60 @@
-import { quickSort } from './quickSort';
+import { QuickSort } from "./QuickSort";
+import { Sorter } from "./Sorter";
+import { MergeSort } from "./MergeSort";
 
-describe('quickSort', () => {
-  test('should sort an array of positive numbers', () => {
-    const nums = [3, 6, 8, 10, 1, 2, 1];
-    const sorted = quickSort(nums);
-    expect(sorted).toEqual([1, 1, 2, 3, 6, 8, 10]);
-  });
+const sorters: Sorter<number>[] = [
+  new MergeSort<number>(),
+  new QuickSort<number>(),
+];
 
-  test('should sort an array of negative numbers', () => {
-    const nums = [-3, -6, -8, -10, -1, -2, -1];
-    const sorted = quickSort(nums);
-    expect(sorted).toEqual([-10, -8, -6, -3, -2, -1, -1]);
-  });
+const testCases = [
+  {
+    description: "an array of positive numbers",
+    input: [3, 6, 8, 10, 1, 2, 1],
+    expected: [1, 1, 2, 3, 6, 8, 10],
+  },
+  {
+    description: "an array of negative numbers",
+    input: [-3, -6, -8, -10, -1, -2, -1],
+    expected: [-10, -8, -6, -3, -2, -1, -1],
+  },
+  {
+    description: "an array with both positive and negative numbers",
+    input: [3, -6, 8, -10, 1, -2, 0],
+    expected: [-10, -6, -2, 0, 1, 3, 8],
+  },
+  { description: "an empty array", input: [], expected: [] },
+  { description: "an array with a single element", input: [5], expected: [5] },
+  {
+    description: "an array with duplicate numbers",
+    input: [4, 2, 4, 2, 4, 1],
+    expected: [1, 2, 2, 4, 4, 4],
+  },
+  {
+    description: "an already sorted array",
+    input: [1, 2, 3, 4, 5],
+    expected: [1, 2, 3, 4, 5],
+  },
+  {
+    description: "a reverse sorted array",
+    input: [5, 4, 3, 2, 1],
+    expected: [1, 2, 3, 4, 5],
+  },
+  {
+    description: "an array with all identical elements",
+    input: [7, 7, 7, 7],
+    expected: [7, 7, 7, 7],
+  },
+];
 
-  test('should sort an array with both positive and negative numbers', () => {
-    const nums = [3, -6, 8, -10, 1, -2, 0];
-    const sorted = quickSort(nums);
-    expect(sorted).toEqual([-10, -6, -2, 0, 1, 3, 8]);
+for (let sorter of sorters) {
+  describe(`Tests for ${sorter.constructor.name}`, () => {
+    for (const { description, input, expected } of testCases) {
+      test(`should sort ${description}`, () => {
+        const arrayToSort = [...input]; // Clone to avoid modifying the original array
+        sorter.sort(arrayToSort);
+        expect(arrayToSort).toEqual(expected);
+      });
+    }
   });
-
-  test('should handle an empty array', () => {
-    const nums: number[] = [];
-    const sorted = quickSort(nums);
-    expect(sorted).toEqual([]);
-  });
-
-  test('should handle an array with a single element', () => {
-    const nums = [5];
-    const sorted = quickSort(nums);
-    expect(sorted).toEqual([5]);
-  });
-
-  test('should handle an array with duplicate numbers', () => {
-    const nums = [4, 2, 4, 2, 4, 1];
-    const sorted = quickSort(nums);
-    expect(sorted).toEqual([1, 2, 2, 4, 4, 4]);
-  });
-
-  test('should handle an already sorted array', () => {
-    const nums = [1, 2, 3, 4, 5];
-    const sorted = quickSort(nums);
-    expect(sorted).toEqual([1, 2, 3, 4, 5]);
-  });
-
-  test('should handle a reverse sorted array', () => {
-    const nums = [5, 4, 3, 2, 1];
-    const sorted = quickSort(nums);
-    expect(sorted).toEqual([1, 2, 3, 4, 5]);
-  });
-
-  test('should handle an array with all identical elements', () => {
-    const nums = [7, 7, 7, 7];
-    const sorted = quickSort(nums);
-    expect(sorted).toEqual([7, 7, 7, 7]);
-  });
-});
+}

@@ -1,56 +1,51 @@
-function mergeSort(nums: number[]): void {
-  if (nums.length <= 1) {
-    return;
-  }
+import { Sorter } from "./Sorter";
 
-  let left: number[] = [];
-  let right: number[] = [];
-
-  let j = 0;
-  for (let i = 0; i < nums.length; i++) {
-    if (i < nums.length / 2) {
-      left[i] = nums[i];
-    } else {
-      right[j] = nums[i];
-      j++;
+export class MergeSort<T> implements Sorter<T> {
+  sort(data: T[]): void {
+    if (data.length <= 1) {
+      return;
     }
-  }
 
-  mergeSort(left);
-  mergeSort(right);
-  merge(nums, left, right);
-}
+    let left: T[] = [];
+    let right: T[] = [];
 
-function merge(nums: number[], left: number[], right: number[]): void {
-  let l = 0;
-  let r = 0;
-  let k = 0;
-  while (l < left.length && r < right.length) {
-    if(left[l] <= right[r]){
-        nums[k] = left[l];
-        l++;
+    for (let i = 0, j = 0; i < data.length; i++) {
+      if (i < data.length / 2) {
+        left[i] = data[i];
+      } else {
+        right[j++] = data[i];
+      }
     }
-    else{
-        nums[k] = right[r];
-        r++;
+
+    this.sort(left);
+    this.sort(right);
+    this.merge(data, left, right);
+  }
+
+  merge(data: T[], left: T[], right: T[]): void {
+    let l = 0,
+      r = 0,
+      k = 0;
+
+    while (l < left.length && r < right.length) {
+      if (left[l] < right[r]) {
+        data[k] = left[l++];
+      } else {
+        data[k] = right[r++];
+      }
+      k++;
     }
-    k++;
-  }
-
-  while(l < left.length) {
-    nums[k] = left[l];
-    l++;
-    k++;
-  }
-
-  while(r < right.length ){
-    nums[k] = right[r];
-    r++;
-    k++;
+    while (l < left.length) {
+      data[k++] = left[l++];
+    }
+    while (r < right.length) {
+      data[k++] = right[r++];
+    }
   }
 }
 
-let nums = [1, 9, 4, 8, 2, 4, 3, 5];
-console.log(`unsorted = ${nums}`);
-mergeSort(nums);
-console.log(`sorted = ${nums}`);
+// let nums = [1, 9, 4, 8, 2, 4, 3, 5];
+// console.log(`unsorted = ${nums}`);
+// const sorter = new MergeSort<number>();
+// sorter.sort(nums);
+// console.log(`sorted = ${nums}`);
