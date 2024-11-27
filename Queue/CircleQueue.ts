@@ -12,7 +12,6 @@ export class CircleQueue {
   }
 
   enQueue(value: number): boolean {
-    console.log(`enQueue(${value}) called`);
     if (this.isFull()) {
       return false;
     }
@@ -30,7 +29,6 @@ export class CircleQueue {
   }
 
   deQueue(): boolean {
-    console.log(`deQueue called`);
     if (this.isEmpty()) {
       return false;
     }
@@ -38,7 +36,7 @@ export class CircleQueue {
     this.queue[this.head] = undefined;
     this.size--;
 
-    if (this.head >= this.queue.length - 1) {
+    if (this.head >= this.queue.length - 1 || this.isEmpty()) {
       this.head = 0;
     } else {
       this.head++;
@@ -71,15 +69,11 @@ export class CircleQueue {
   }
 
   print(): void {
-    let str = "queue: \n";
-    str += `current size: ${this.size} \n`;
-    str += `max size: ${this.queue.length} \n`;
-    str += `isEmpty: ${this.isEmpty()} \n`;
-    str += `isFull: ${this.isFull()} \n`;
-    str += `Front: ${this.Front()} \n`;
-    str += `Rear: ${this.Rear()} \n`;
-    str += `head: queue[${this.head}] \n`;
-    str += `tail: queue[${this.tail}] \n`;
+    let str = "------------- ----------- ----------- ---------- \n";
+    str += `current size: ${this.size}     -     max size: ${this.queue.length}\n`;
+    str += `isEmpty: ${this.isEmpty()}    -    isFull: ${this.isFull()} \n`;
+    str += `Front: queue[${this.head}]    -    ${this.Front()} \n`;
+    str += `Rear: queue[${this.tail}]   -   ${this.Rear()}`;
     console.log(str);
     this.printContents();
     console.log("\n");
@@ -94,38 +88,26 @@ export class CircleQueue {
     console.log(str);
   }
 }
+/*
+const queue = new CircleQueue(7);
 
-const queue = new CircleQueue(3);
-console.log("NEW QUEUE:");
-queue.print();
-
-queue.enQueue(1);
-queue.printContents();
-
-queue.enQueue(2);
-queue.printContents();
-
-queue.enQueue(3);
+queue.enQueue(69);
 queue.print();
 
 queue.deQueue();
 queue.print();
 
-queue.deQueue();
+queue.enQueue(92);
+queue.print();
+
+queue.enQueue(12);
 queue.print();
 
 queue.deQueue();
 queue.print();
 
+queue.isFull();
+queue.isFull();
 
-queue.enQueue(1);
 queue.print();
-
-queue.enQueue(2);
-queue.print();
-
-queue.enQueue(3);
-queue.print();
-
-queue.enQueue(4);
-queue.print();
+*/
