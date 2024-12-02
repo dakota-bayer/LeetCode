@@ -1,6 +1,6 @@
-import { QuickSort } from "./QuickSort";
+import { QuickSort } from "./quickSort";
 import { Sorter } from "./Sorter";
-import { MergeSort } from "./MergeSort";
+import { MergeSort } from "./mergeSort";
 
 const sorters: Sorter<number>[] = [
   new MergeSort<number>(),
