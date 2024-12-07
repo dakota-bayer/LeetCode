@@ -1,5 +1,4 @@
-/*
-9. PalindromeNumber (easy)
+/* 9. PalindromeNumber (easy)
 
 Given an integer x, return true if x is a palindrome, and false otherwise.
 
@@ -20,13 +19,16 @@ Example 3:
 */
 
 export function isPalindrome(x: number): boolean {
-    let str = x.toString();
+    if(x < 0) return false;
+    if(x < 10) return true;
 
-    for(let x = 0; x < str.length / 2; x++){
-        if(str.charAt(x) != str.charAt(str.length - 1 - x)){
+    let xStr = x.toString();
+
+    for(let i = 0; i < xStr.length / 2; i++){
+        if(xStr[i] !== xStr[xStr.length - 1 -i]) {
             return false;
         }
     }
-    
+
     return true;
-};
+}
