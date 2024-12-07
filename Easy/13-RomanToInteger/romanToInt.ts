@@ -52,68 +52,32 @@ It is guaranteed that s is a valid roman numeral in the range [1, 3999].
 */
 
 export function romanToInt(s: string): number {
-  let total: number = 0;
-  let values: number[] = getValueArray(s);
+    let previous: number = 0;
+    let current: number = 0;
+    let result: number = 0;
+    const romanValues: Map<string, number> = new Map<string, number>([
+        ['I', 1],
+        ['V', 5],
+        ['X', 10],
+        ['L', 50],
+        ['C', 100],
+        ['D', 500],
+        ['M', 1000]
+    ]);
 
-  for (let c of values) {
-    total += c;
-  }
+    for (let i = s.length - 1; i >= 0; i--) {
+        current = romanValues.get(s[i])!;
 
-  total = performSubtraction(total, values);
+        if (current < previous) {
+            // IX => 10 - 1
+            result -= current;
+        }
+        else {
+            result += current;
+        }
 
-  return total;
-}
-
-function performSubtraction(total: number, values: number[]): number {
-  // if one value is < than the value after it, then subtract that value twice (beacuse it was added, now we need to subtract it)
-
-  for (let i = 1; i < values.length; i++) {
-    if(values[i - 1] < values[i]){
-        total -= (values[i - 1] * 2);
+        previous = current;
     }
-  }
 
-  return total;
-}
-
-enum numerals {
-  I = 1,
-  V = 5,
-  X = 10,
-  L = 50,
-  C = 100,
-  D = 500,
-  M = 1000,
-}
-
-function convertStrToEnum(convertingStr: string): numerals {
-  switch (convertingStr) {
-    case "I":
-      return numerals.I;
-    case "V":
-      return numerals.V;
-    case "X":
-      return numerals.X;
-    case "L":
-      return numerals.L;
-    case "C":
-      return numerals.C;
-    case "D":
-      return numerals.D;
-    case "M":
-      return numerals.M;
-    default:
-      throw new Error("invalid word!");
-  }
-}
-
-function getValueArray(s: string): number[] {
-  let valueArray: number[] = [];
-  let stringArray: string[] = s.split("");
-
-  for (let c of stringArray) {
-    valueArray.push(convertStrToEnum(c));
-  }
-
-  return valueArray;
+    return result;
 }
