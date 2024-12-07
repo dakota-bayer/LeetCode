@@ -12,13 +12,13 @@ describe('merge', () => {
     });
 
     test('handles case where nums2 is empty', () => {
-        const nums1 = [1];
-        const m = 1;
+        const nums1 = [2, 1];
+        const m = 2;
         const nums2: number[] = [];
         const n = 0;
 
         merge(nums1, m, nums2, n);
-        expect(nums1).toEqual([1]);
+        expect(nums1).toEqual([1, 2]);
     });
 
     test('handles case where nums1 is empty', () => {
@@ -76,16 +76,6 @@ describe('merge', () => {
         const m = 0;
         const nums2 = [1, 2, 3];
         const n = 3;
-
-        merge(nums1, m, nums2, n);
-        expect(nums1).toEqual([1, 2, 3]);
-    });
-
-    test('handles case where nums2 contains all zeros initially', () => {
-        const nums1 = [1, 2, 3, 0, 0, 0];
-        const m = 3;
-        const nums2 = [0, 0, 0];
-        const n = 0;
 
         merge(nums1, m, nums2, n);
         expect(nums1).toEqual([1, 2, 3]);

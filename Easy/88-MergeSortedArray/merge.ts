@@ -42,37 +42,24 @@ Follow up: Can you come up with an algorithm that runs in O(m + n) time?
 */
 
 export function merge(nums1: number[], m: number, nums2: number[], n: number): void {
-    let n1 = 0;
-    let n2 = 0;
-    let totalSize = m + n;
-
-    while (n1 < totalSize) {
-        if (nums1[n1] <= nums2[n2] && n1 < m) {
-            // do nothing, just advance pointer
-            n1++;
-        }
-        else {
-            const temp = nums1[n1];
-            nums1[n1] = nums2[n2];
-            n1++;
-            if(n1 < totalSize) {
-                nums1[n1] = temp;
-                n2++;
-                m++;
-            }
-        }
+    // copy elemnts from nums2 over to nums1
+    for (let i = m, j = 0; i < nums1.length; i++, j++) {
+        nums1[i] = nums2[j];
     }
+
+    // sort
+    nums1.sort((a, b) => a - b);
 };
 
 /*
-(function debugMerge() {
-    const nums1 = [1, 2, 3, 0, 0, 0];
-    const m = 3;
-    const nums2 = [2, 5, 6];
-    const n = 3;
 
-    console.log('Before merge:', nums1);
-    merge(nums1, m, nums2, n);
-    console.log('After merge:', nums1); // Expected output: [1, 2, 2, 3, 5, 6]
-})();
+const nums1 = [1, 2, 3, 0, 0, 0];
+const m = 3;
+const nums2 = [2, 5, 6];
+const n = 3;
+
+console.log('Before merge:', nums1);
+merge(nums1, m, nums2, n);
+console.log('After merge:', nums1); // Expected output: [1, 2, 2, 3, 5, 6]
+
 */
