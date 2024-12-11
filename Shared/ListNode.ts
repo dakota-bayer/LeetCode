@@ -17,3 +17,13 @@ export function createLinkedList(values: number[]): ListNode | null {
     }
     return head;
 }
+
+export function linkedListToArray(head: ListNode | null): number[] {
+    const result: number[] = [];
+    let current = head;
+    while (current) {
+        result.push(current.val);
+        current = current.next;
+    }
+    return result;
+}
