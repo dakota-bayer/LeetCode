@@ -33,7 +33,7 @@ export function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): L
     let current = dummy;
 
     while (list1 && list2) {
-        if(list1.val <= list2.val) {
+        if (list1.val <= list2.val) {
             current.next = list1;
             list1 = list1.next;
         }
