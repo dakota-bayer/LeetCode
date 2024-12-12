@@ -23,7 +23,7 @@ Constraints:
 
 import { TreeNode } from "../../Shared/TreeNode";
 
-export function minDepth(root: TreeNode | null): number {
+export function minDepthBfs(root: TreeNode | null): number {
     if (!root) {
         return 0;
     }
@@ -50,3 +50,19 @@ export function minDepth(root: TreeNode | null): number {
 
     return depth;
 };
+
+export function minDepth(root: TreeNode | null): number {
+    if (!root) return 0;
+    return minDepthRecursive(root, 1);
+};
+
+function minDepthRecursive(node: TreeNode, depth: number): number {
+    if (!node.right && !node.left) {
+        return depth;
+    }
+
+    const r: number = node?.right ? minDepthRecursive(node.right, depth + 1) : Number.POSITIVE_INFINITY;
+    const l: number = node?.left ? minDepthRecursive(node.left, depth + 1) : Number.POSITIVE_INFINITY;
+
+    return Math.min(r, l);
+}
