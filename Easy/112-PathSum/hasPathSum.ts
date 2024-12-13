@@ -32,7 +32,36 @@ Constraints:
 
 import { TreeNode } from "../../Shared/TreeNode";
 
+// Iterative DFS
 export function hasPathSum(root: TreeNode | null, targetSum: number): boolean {
+    if (!root) {
+        return false;
+    }
+
+    const stack: [TreeNode, number][] = [];
+    stack.push([root, root.val]);
+
+    while (stack.length > 0) {
+        const [node, currentSum] = stack.pop()!;
+
+        if (!node.left && !node.right && currentSum === targetSum) {
+            return true;
+        }
+
+        if (node.left) {
+            stack.push([node.left, currentSum + node.left.val]);
+        }
+
+        if (node.right) {
+            stack.push([node.right, currentSum + node.right.val]);
+        }
+    }
+
+    return false;
+}
+
+// Using recusion for DFS
+export function hasPathSum2(root: TreeNode | null, targetSum: number): boolean {
     if (!root) {
         return false;
     }
