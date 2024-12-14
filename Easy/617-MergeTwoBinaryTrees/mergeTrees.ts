@@ -32,13 +32,49 @@ Constraints:
 import { TreeNode } from "../../Shared/TreeNode";
 
 export function mergeTrees(root1: TreeNode | null, root2: TreeNode | null): TreeNode | null {
-    if(!root1 && !root2) return null;
+    if (!root1 && !root2) return null;
+    if (!root1) return root2;
+    if (!root2) return root1;
+
+    const aQueue: (TreeNode | null)[] = [root1];
+    const bQueue: (TreeNode | null)[] = [root2];
+
+    while (aQueue.length > 0 && bQueue.length > 0) {
+        const nodeA = aQueue.shift()!;
+        const nodeB = bQueue.shift()!;
+
+        // Update the value of the current node in tree 1
+        nodeA.val += nodeB.val;
+
+        // Handle the left child
+        if (nodeA.left && nodeB.left) {
+            aQueue.push(nodeA.left);
+            bQueue.push(nodeB.left);
+        } else if (!nodeA.left && nodeB.left) {
+            nodeA.left = nodeB.left;
+        }
+
+        // Handle the right child
+        if (nodeA.right && nodeB.right) {
+            aQueue.push(nodeA.right);
+            bQueue.push(nodeB.right);
+        } else if (!nodeA.right && nodeB.right) {
+            nodeA.right = nodeB.right;
+        }
+    }
+
+    return root1;
+}
+
+// DFS Solution
+export function mergeTreesDfs(root1: TreeNode | null, root2: TreeNode | null): TreeNode | null {
+    if (!root1 && !root2) return null;
     if (!root1) return root2;
     if (!root2) return root1;
 
     const root = new TreeNode(root1.val + root2.val);
-    root.left = mergeTrees(root1.left, root2.left);
-    root.right = mergeTrees(root1.right, root2.right);
+    root.left = mergeTreesDfs(root1.left, root2.left);
+    root.right = mergeTreesDfs(root1.right, root2.right);
 
     return root;
 };
