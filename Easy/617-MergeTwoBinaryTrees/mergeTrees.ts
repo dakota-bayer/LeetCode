@@ -1,4 +1,4 @@
-/* 617. Merge Two Binary Trees
+/* 617. Merge Two Binary Trees (rated easy but i thought it was difficult)
 
 You are given two binary trees root1 and root2.
 
