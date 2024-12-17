@@ -1,4 +1,4 @@
-import { Node } from "../Shared/Node";
+import { Node } from "../..//Shared/Node";
 
 export class Stack<T> {
   private head: Node<T> | null;
