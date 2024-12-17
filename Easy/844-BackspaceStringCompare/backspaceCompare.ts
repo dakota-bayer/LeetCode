@@ -60,9 +60,14 @@ export function backspaceCompare(s: string, t: string): boolean {
             }
         }
 
-        if (s[sIndex--] !== t[tIndex--]) return false;
+        if (s[sIndex] !== t[tIndex]) {
+            return false;
+        }
+
+        sIndex--;
+        tIndex--;
     }
     return true;
 };
 
-backspaceCompare("ab##", "c#d#");
+// backspaceCompare("ab##", "c#d#");
