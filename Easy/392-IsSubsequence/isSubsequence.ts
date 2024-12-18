@@ -29,30 +29,22 @@ Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 
 */
 
 export function isSubsequence(s: string, t: string): boolean {
-    if (s.length === t.length && s !== t) {
-        return false;
-    }
+    let sIndex = 0; // current letter we're lookg at in s
+    let tIndex = 0; // current letter we're looking at in t
 
-    let k = 0; // current letter we're lookg at in s
-    let l = 0; // invalid letter in t
-
-    const tArr = Array.from(t);
-
-    for (let r = 0; r < tArr.length && k < s.length; r++) {
-        if (tArr[r] === s[k]) {
-            // swap because we found a character that belongs in its position
-            const temp = tArr[l];
-            tArr[l] = tArr[r];
-            tArr[r] = temp;
-            l++;
-            k++;
+    while (sIndex < s.length && tIndex < t.length) {
+        if (s[sIndex] === t[tIndex]) {
+            // increment s because we found  match
+            sIndex++;
         }
+        tIndex++;
     }
-    return tArr.slice(0, s.length).join("") === s;
+
+    return sIndex == s.length; // true if we found all matches
 };
 
 
-const s = "acb";
-const t = "ahbgdc";
-const result = isSubsequence(s, t);
+// const s = "acb";
+// const t = "ahbgdc";
+// const result = isSubsequence(s, t);
 
