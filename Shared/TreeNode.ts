@@ -8,3 +8,11 @@ export class TreeNode {
         this.right = (right === undefined ? null : right)
     }
 }
+
+export function createTreeNode(
+    value: number | null,
+    left: TreeNode | null = null,
+    right: TreeNode | null = null
+): TreeNode | null {
+    return value !== null ? new TreeNode(value, left, right) : null;
+}
