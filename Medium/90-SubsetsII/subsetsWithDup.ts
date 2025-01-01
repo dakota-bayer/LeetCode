@@ -24,24 +24,23 @@ export function subsetsWithDup(nums: number[]): number[][] {
     const output: number[][] = [];
     nums.sort((a, b) => a - b);
 
-    function dfs(i: number, current: number[]) {
+    function dfs(i: number, subset: number[]) {
         if (i >= nums.length) {
-            output.push(current);
+            output.push([...subset]);
             return;
         }
 
-        const added = [...current];
-        added.push(nums[i]);
-        dfs(i + 1, added);
+        // recrusive call when adding the current number
+        subset.push(nums[i]);
+        dfs(i + 1, subset);
 
-        let j = i;
-        while (j > 0 && j < nums.length && nums[j] === nums[j - 1]) {
-            j++;
-            if (j >= nums.length) {
-                return;
-            }
+        // recursive call without adding the current number
+        subset.pop();
+
+        while (i + 1 < nums.length && nums[i] === nums[i + 1]) {
+            i++;
         }
-        dfs(j + 1, [...current]);
+        dfs(i + 1, subset);
     }
 
     dfs(0, []);
@@ -49,5 +48,7 @@ export function subsetsWithDup(nums: number[]): number[][] {
     return output;
 };
 
+/*
 const arr = [1, 2, 2];
 subsetsWithDup(arr);
+*/
