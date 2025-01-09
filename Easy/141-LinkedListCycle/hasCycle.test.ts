@@ -2,7 +2,7 @@ import { hasCycle } from "./hasCycle";
 import { ListNode } from "../../Shared/ListNode";
 
 describe("hasCycle", () => {
-    function createLinkedListWithCycle(values: number[], pos: number): ListNode | null {
+    function arrayToLinkedListWithCycle(values: number[], pos: number): ListNode | null {
         if (values.length === 0) return null;
 
         const nodes = values.map(val => new ListNode(val));
@@ -18,32 +18,32 @@ describe("hasCycle", () => {
     }
 
     test("returns true for a list with a cycle (Example 1)", () => {
-        const head = createLinkedListWithCycle([3, 2, 0, -4], 1);
+        const head = arrayToLinkedListWithCycle([3, 2, 0, -4], 1);
         expect(hasCycle(head)).toBe(true);
     });
 
     test("returns true for a list with a cycle (Example 2)", () => {
-        const head = createLinkedListWithCycle([1, 2], 0);
+        const head = arrayToLinkedListWithCycle([1, 2], 0);
         expect(hasCycle(head)).toBe(true);
     });
 
     test("returns false for a list without a cycle (Example 3)", () => {
-        const head = createLinkedListWithCycle([1], -1);
+        const head = arrayToLinkedListWithCycle([1], -1);
         expect(hasCycle(head)).toBe(false);
     });
 
     test("returns false for an empty list", () => {
-        const head = createLinkedListWithCycle([], -1);
+        const head = arrayToLinkedListWithCycle([], -1);
         expect(hasCycle(head)).toBe(false);
     });
 
     test("returns true for a longer list with a cycle", () => {
-        const head = createLinkedListWithCycle([1, 2, 3, 4, 5], 2);
+        const head = arrayToLinkedListWithCycle([1, 2, 3, 4, 5], 2);
         expect(hasCycle(head)).toBe(true);
     });
 
     test("returns false for a longer list without a cycle", () => {
-        const head = createLinkedListWithCycle([1, 2, 3, 4, 5], -1);
+        const head = arrayToLinkedListWithCycle([1, 2, 3, 4, 5], -1);
         expect(hasCycle(head)).toBe(false);
     });
 

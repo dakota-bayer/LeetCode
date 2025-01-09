@@ -2,7 +2,7 @@ import { reverseList } from "./reverseList";
 import { ListNode } from "../../Shared/ListNode";
 
 describe("reverseList", () => {
-    function createLinkedList(values: number[]): ListNode | null {
+    function arrayToLinkedList(values: number[]): ListNode | null {
         if (values.length === 0) return null;
 
         const nodes = values.map(val => new ListNode(val));
@@ -22,31 +22,31 @@ describe("reverseList", () => {
     }
 
     test("reverses a list with multiple nodes (Example 1)", () => {
-        const head = createLinkedList([1, 2, 3, 4, 5]);
+        const head = arrayToLinkedList([1, 2, 3, 4, 5]);
         const result = reverseList(head);
         expect(getListValues(result)).toEqual([5, 4, 3, 2, 1]);
     });
 
     test("reverses a list with two nodes (Example 2)", () => {
-        const head = createLinkedList([1, 2]);
+        const head = arrayToLinkedList([1, 2]);
         const result = reverseList(head);
         expect(getListValues(result)).toEqual([2, 1]);
     });
 
     test("handles an empty list (Example 3)", () => {
-        const head = createLinkedList([]);
+        const head = arrayToLinkedList([]);
         const result = reverseList(head);
         expect(result).toBeNull();
     });
 
     test("reverses a single-node list", () => {
-        const head = createLinkedList([1]);
+        const head = arrayToLinkedList([1]);
         const result = reverseList(head);
         expect(getListValues(result)).toEqual([1]);
     });
 
     test("reverses a longer list", () => {
-        const head = createLinkedList([10, 20, 30, 40, 50, 60, 70]);
+        const head = arrayToLinkedList([10, 20, 30, 40, 50, 60, 70]);
         const result = reverseList(head);
         expect(getListValues(result)).toEqual([70, 60, 50, 40, 30, 20, 10]);
     });

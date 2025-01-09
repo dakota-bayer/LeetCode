@@ -7,7 +7,7 @@ export class ListNode {
     }
 }
 
-export function createLinkedList(values: number[]): ListNode | null {
+export function arrayToLinkedList(values: number[]): ListNode | null {
     if (values.length === 0) return null;
     const head = new ListNode(values[0]);
     let current = head;

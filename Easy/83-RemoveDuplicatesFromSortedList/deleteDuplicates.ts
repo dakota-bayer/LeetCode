@@ -18,7 +18,7 @@ Constraints:
 
 */
 
-import { ListNode, createLinkedList } from "../../Shared/ListNode";
+import { ListNode, arrayToLinkedList } from "../../Shared/ListNode";
 
 export function deleteDuplicates(head: ListNode | null): ListNode | null {
     if (!head) {
@@ -39,5 +39,5 @@ export function deleteDuplicates(head: ListNode | null): ListNode | null {
     return head;
 };
 
-// let list = createLinkedList([1, 1, 2, 3, 3]);
+// let list = arrayToLinkedList([1, 1, 2, 3, 3]);
 // deleteDuplicates(list);

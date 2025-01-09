@@ -51,7 +51,7 @@ export function isPalindrome(head: ListNode | null): boolean {
 };
 
 /*
-import { createLinkedList } from "../../Shared/ListNode";
-const list = createLinkedList([1, 2, 3, 2, 1]);
+import { arrayToLinkedList } from "../../Shared/ListNode";
+const list = arrayToLinkedList([1, 2, 3, 2, 1]);
 isPalindrome(list);
 */
