@@ -40,8 +40,46 @@ Constraints:
  Do not return anything, modify head in-place instead.
  */
 
-import { ListNode } from "../../Shared/ListNode";
+import { ListNode, arrayToLinkedList } from "../../Shared/ListNode";
 
 export function reorderList(head: ListNode | null): void {
+    if (!head) return;
 
+    let slow = head;
+    let fast = head;
+
+    // get to middle of list
+    while (fast && fast.next) {
+        slow = slow.next!;
+        fast = fast.next.next!;
+    }
+
+    // reverse second half of list
+    let second = slow.next;
+    slow.next = null;
+    let prev: ListNode | null = null;
+
+    while(second) {
+        const next = second.next;
+        second.next = prev;
+        prev = second;
+        second = next;
+    }
+
+    // merge the two halves
+    let first = head;
+    let reversedSecond = prev;
+    while(reversedSecond) {
+        const tmp1 = first.next;
+        const tmp2 = reversedSecond.next;
+
+        first.next = reversedSecond;
+        reversedSecond.next = tmp1;
+        
+        first = tmp1!;
+        reversedSecond = tmp2;
+    }
 };
+
+const input = arrayToLinkedList([1, 2, 3, 4, 5]);
+reorderList(input);
