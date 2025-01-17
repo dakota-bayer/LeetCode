@@ -18,7 +18,7 @@ Constraints:
 
 export function generate(numRows: number): number[][] {
   const output: number[][] = [[1]];
-  let i: number = 0;
+  let i: number = 1;
 
   let previous: number[] = output[0];
 
@@ -26,7 +26,7 @@ export function generate(numRows: number): number[][] {
     const row: number[] = [];
     row.push(1);
 
-    for (let j = 1; j < previous.length - 1; j++) {
+    for (let j = 1; j < previous.length; j++) {
       row.push(previous[j - 1] + previous[j]);
     }
 
